@@ -1,0 +1,23 @@
+/* ===============================
+	fade-from-bottom 用CSS
+================================= */
+// Animationクラスを作って、_mixin化する
+.fade-from-bottom {
+  opacity: 0;
+  transform: translateY(100px);
+}
+.fade-from-bottom-animation {
+  animation: fade-from-bottom 1s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
