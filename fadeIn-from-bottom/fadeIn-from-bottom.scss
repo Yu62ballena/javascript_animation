@@ -1,0 +1,25 @@
+/* ===============================
+	fade-from-bottom 用CSS
+================================= */
+@use "mixin" as *;
+
+// Animationクラスを作って、_mixin化する
+.fadeIn-from-bottom {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.fadeIn-from-bottom-animation {
+  @include fadeIn-from-bottom($name: fadeIn-from-bottom);
+}
+
+@keyframes fadeIn-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
