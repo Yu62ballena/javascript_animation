@@ -1,0 +1,147 @@
+/* ===============================
+		cover-slide用CSS
+================================= */
+@use "mixin" as *;
+
+// duration と カバーの色を設定
+$duration: 0.5s;
+$cover_color: orange;
+
+$slide-pattern: (
+  sfrom-upper: from-upper,
+  sfrom-right: from-right,
+  sfrom-bottom: from-bottom,
+  sfrom-left: from-left,
+);
+
+.slide-container {
+  width: 50%;
+}
+
+.slide-image {
+  opacity: 0;
+  vertical-align: bottom;
+
+  .inview & {
+    opacity: 1;
+    @include animation($name: img-show, $duration: $duration);
+  }
+}
+
+.cover-slide {
+  position: relative;
+
+  @each $key, $value in $slide-pattern {
+    &.#{$key} {
+      &::after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        background-color: $cover_color;
+
+        @if $key == sfrom-upper {
+          top: 0;
+          right: 0;
+          bottom: 100%;
+          left: 0;
+        } @else if $key == sfrom-right {
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 100%;
+        } @else if $key == sfrom-bottom {
+          top: 100%;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        } @else if $key == sfrom-left {
+          top: 0;
+          right: 100%;
+          bottom: 0;
+          left: 0;
+        }
+      }
+
+      &.inview {
+        &::after {
+          @include animation($name: $value, $duration: $duration);
+        }
+      }
+    }
+  }
+}
+
+@keyframes from-upper {
+  0% {
+    top: 0;
+    bottom: 100%;
+  }
+  50% {
+    top: 0;
+    bottom: 0;
+  }
+  100% {
+    top: 100%;
+    bottom: 0;
+  }
+}
+
+@keyframes from-right {
+  0% {
+    right: 0;
+    left: 100%;
+  }
+  50% {
+    right: 0;
+    left: 0;
+  }
+  100% {
+    right: 100%;
+    left: 0;
+  }
+}
+
+@keyframes from-bottom {
+  0% {
+    bottom: 0;
+    top: 100%;
+  }
+  50% {
+    bottom: 0;
+    top: 0;
+  }
+  100% {
+    bottom: 100%;
+    top: 0;
+  }
+}
+
+@keyframes from-left {
+  0% {
+    left: 0;
+    right: 100%;
+  }
+  50% {
+    left: 0;
+    right: 0;
+  }
+  100% {
+    left: 100%;
+    right: 0;
+  }
+}
+
+@keyframes img-show {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  50.1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
